@@ -1,2 +1,8 @@
+iceberg.vim
+indentLine
 neobundle.vim
-nerdtree
+previm
+unite.vim
+vim-expand-region
+vim-surround
+vimfiler
