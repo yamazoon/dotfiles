@@ -37,19 +37,21 @@ inoremap <silent> jj <ESC>
 
 ":h ex-cmd-index でコマンドのヘルプ出せるよ(メモ)
 
-" kensakupath
-set path+=/Users/tetsuya/00_yamazon/sandbox/**
-
 " command-refできるように
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
 " ctrl-a のときに10進数扱いにする(8進数になるため)
 set nrformats=
+
 set imdisable "Esc押下時に英数入力に変更する
+
 set fileencoding=utf-8 " 保存時の文字コード
+
 set fileencodings=ucs-boms,utf-8,euc-jp,cp932 " 読み込み時の文字コードの自動判別. 左側が優先される
+
 set fileformats=unix,dos,mac " 改行コードの自動判別. 左側が優先される
+
 set ambiwidth=double " □や○文字が崩れる問題を解決
 
 " tab -> space
@@ -60,29 +62,9 @@ set list " 不可視文字を表示する
 set listchars=tab:>_,trail:_  " タブを >--- 半スペを . で表示する
 "set listchars+=space:\|
 
-let mapleader = "\<Space>"
-nnoremap <Leader>t :wq!
-vnoremap <Leader>t :wq!
-nnoremap <Leader>o :q!<CR>
-vnoremap <Leader>o :q!<CR>
-nnoremap <Leader>e :w!<CR>
-vnoremap <Leader>e :w!<CR>
-vnoremap <Leader>h :vertical diffsplit
-nnoremap <Leader>h :vertical diffsplit
-nnoremap <Leader>s :%s#
-vnoremap <Leader>s :s#
-nnoremap <Leader>l :ls<CR>
-vnoremap <Leader>l :ls<CR>
-nnoremap <Leader>i :VimFilerBufferDir<CR>
-vnoremap <Leader>i :VimFilerBufferDir<CR>
-nnoremap <Leader>[ :bprev<CR>
-nnoremap <Leader>] :bnext<CR>
-nnoremap <Leader>p "0p`<CR>
-vnoremap <Leader>p "0p`<CR>
-nnoremap <Leader>c :cd %:h\|pwd<CR>
-vnoremap <Leader>c :cd %:h\|pwd<CR>
-nnoremap <Leader>b :bd!<CR>
-vnoremap <Leader>b :bd!<CR>
+" no indent
+set noautoindent
+set nosmartindent
 
 "" kensaku kensuu count
 "nnoremap <expr> / _(":%s/<Cursor>/&/gn")
@@ -144,6 +126,31 @@ nnoremap <Space>p<CR> V:!pwsh -nol<CR>   # 行選択していない状態から�
 "	autocmd Colorscheme * highlight Folded ctermbg=none
 "	autocmd Colorscheme * highlight EndOfBuffer ctermbg=none 
 "augroup END
+
+
+let mapleader = "\<Space>"
+nnoremap <Leader>t :wq!
+vnoremap <Leader>t :wq!
+nnoremap <Leader>o :q!<CR>
+vnoremap <Leader>o :q!<CR>
+nnoremap <Leader>e :w!<CR>
+vnoremap <Leader>e :w!<CR>
+vnoremap <Leader>h :vertical diffsplit
+nnoremap <Leader>h :vertical diffsplit
+nnoremap <Leader>s :%s#
+vnoremap <Leader>s :s#
+nnoremap <Leader>l :ls<CR>
+vnoremap <Leader>l :ls<CR>
+nnoremap <Leader>i :VimFilerBufferDir<CR>
+vnoremap <Leader>i :VimFilerBufferDir<CR>
+nnoremap <Leader>[ :bprev<CR>
+nnoremap <Leader>] :bnext<CR>
+nnoremap <Leader>p "0p`<CR>
+vnoremap <Leader>p "0p`<CR>
+nnoremap <Leader>c :cd %:h\|pwd<CR>
+vnoremap <Leader>c :cd %:h\|pwd<CR>
+nnoremap <Leader>d :bd!<CR>
+vnoremap <Leader>d :bd!<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -238,7 +245,7 @@ if dein#load_state('/Users/tetsuya/dotfiles/.vim/dein')
   "call dein#add('Shougo/neosnippet-snippets')
    call dein#add('Shougo/unite.vim')
    call dein#add('Shougo/vimfiler')
-   call dein#add('Yggdroot/indentLine')
+   "call dein#add('Yggdroot/indentLine')
    call dein#add('cocopon/iceberg.vim')
 "   call dein#add('kannokanno/previm')
    call dein#add('terryma/vim-expand-region')
@@ -266,10 +273,6 @@ vmap M <Plug>(expand_region_shrink)
 
 " vimfiler safe mode off
 let g:vimfiler_safe_mode_by_default = 0
-
-" no indent
-set noautoindent
-set nosmartindent
 
 " previm
 "autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
