@@ -95,18 +95,15 @@ set number
 " clipboard
 set clipboard+=unnamed
 "set clipboard=unnamed,autoselect "autoselectを入れるとvisualモードで選択したテキストをクリップボードに入れるため削除
-set clipboard=unnamed
+"set clipboard=unnamed
 
 " mouse マウス禁止
 "set ttymouse=xterm2
-"set mouse=a
+set mouse=a
 
-" |sh
-vnoremap <Space><CR> :!sh<CR>    # 行選択中に実行
-nnoremap <Space><CR> V:!sh<CR>   # 行選択していない状態から実行
-vnoremap <Space>p<CR> :!pwsh -nol<CR>    # 行選択中に実行
-nnoremap <Space>p<CR> V:!pwsh -nol<CR>   # 行選択していない状態から実行
-
+" color
+"syntax enable
+colorscheme iceberg
 
 "syntax enable
 "set background=dark
@@ -127,31 +124,63 @@ nnoremap <Space>p<CR> V:!pwsh -nol<CR>   # 行選択していない状態から�
 "	autocmd Colorscheme * highlight EndOfBuffer ctermbg=none 
 "augroup END
 
-
+" Leaderキー
 let mapleader = "\<Space>"
+
+" ファイルを閉じる
 nnoremap <Leader>t :wq!
 vnoremap <Leader>t :wq!
 nnoremap <Leader>o :q!<CR>
 vnoremap <Leader>o :q!<CR>
 nnoremap <Leader>e :w!<CR>
 vnoremap <Leader>e :w!<CR>
+
+" ファイル比較
 vnoremap <Leader>h :vertical diffsplit
 nnoremap <Leader>h :vertical diffsplit
+
+" 置換
 nnoremap <Leader>s :%s#
 vnoremap <Leader>s :s#
-nnoremap <Leader>l :ls<CR>
-vnoremap <Leader>l :ls<CR>
-nnoremap <Leader>i :VimFilerBufferDir<CR>
-vnoremap <Leader>i :VimFilerBufferDir<CR>
-nnoremap <Leader>[ :bprev<CR>
-nnoremap <Leader>] :bnext<CR>
-nnoremap <Leader>p "0p`<CR>
-vnoremap <Leader>p "0p`<CR>
-nnoremap <Leader>c :cd %:h\|pwd<CR>
-vnoremap <Leader>c :cd %:h\|pwd<CR>
+
+" バッファ確認し、入力した数字のバッファに移動
+" (移動しない場合はそのままenter)
+nnoremap <Leader>l :ls<CR>:b 
+vnoremap <Leader>l :ls<CR>:b 
+
+" 今のバッファを保存しないで閉じる
 nnoremap <Leader>d :bd!<CR>
 vnoremap <Leader>d :bd!<CR>
 
+" 改行を含まない行選択
+nnoremap <Leader>a v$ho0
+vnoremap <Leader>a $ho0
+
+" 現在行に書いたコマンドの実行結果を持ってくる
+vnoremap <Leader><CR> :!sh<CR>    # 行選択中に実行
+nnoremap <Leader><CR> V:!sh<CR>   # 行選択していない状態から実行
+vnoremap <Leader>p<CR> :!pwsh -nol<CR>    # 行選択中に実行 Powershell
+nnoremap <Leader>p<CR> V:!pwsh -nol<CR>   # 行選択していない状態から実行 Powershell
+
+" ファイルエクスプローラーを開く
+nnoremap <Leader>i :VimFilerBufferDir<CR>
+vnoremap <Leader>i :VimFilerBufferDir<CR>
+
+" クリップボードから貼り付け
+nnoremap <Leader>p "+p
+vnoremap <Leader>p "+p
+
+" バッファの場所に移動
+nnoremap <Leader>c :cd %:h\|pwd<CR>
+vnoremap <Leader>c :cd %:h\|pwd<CR>
+
+" ハイライトを消す
+nnoremap <Leader>n :noh<CR>
+vnoremap <Leader>n :noh<CR>
+
+
+
+" プラグイン
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" NeoBundle
@@ -246,8 +275,8 @@ if dein#load_state('/Users/tetsuya/dotfiles/.vim/dein')
    call dein#add('Shougo/unite.vim')
    call dein#add('Shougo/vimfiler')
    "call dein#add('Yggdroot/indentLine')
-   call dein#add('cocopon/iceberg.vim')
-"   call dein#add('kannokanno/previm')
+   "call dein#add('cocopon/iceberg.vim')
+   "call dein#add('kannokanno/previm')
    call dein#add('terryma/vim-expand-region')
    call dein#add('tpope/vim-surround')
   " Required:
@@ -267,6 +296,8 @@ endif
 "End dein Scripts-------------------------
 
 
+" プラグイン関連設定
+
 " expand v
 vmap m <Plug>(expand_region_expand)
 vmap M <Plug>(expand_region_shrink)
@@ -281,9 +312,5 @@ let g:vimfiler_safe_mode_by_default = 0
 "let g:previm_custom_css_path = '~/dotfiles/.vim/previm/markdown.css'
 "nnoremap <Leader>m :PrevimOpen<CR>
 "vnoremap <Leader>m :PrevimOpen<CR>
-
-" color
-"syntax enable
-colorscheme iceberg
 
 
