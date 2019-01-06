@@ -167,8 +167,8 @@ nnoremap <Leader>i :VimFilerBufferDir<CR>
 vnoremap <Leader>i :VimFilerBufferDir<CR>
 
 " クリップボードから貼り付け
-nnoremap <Leader>p "0p
-vnoremap <Leader>p "0p
+nnoremap <Leader>p "+p
+vnoremap <Leader>p "+p
 
 " バッファの場所に移動
 nnoremap <Leader>c :cd %:h\|pwd<CR>
