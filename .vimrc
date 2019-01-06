@@ -128,8 +128,8 @@ colorscheme iceberg
 let mapleader = "\<Space>"
 
 " ファイルを閉じる
-nnoremap <Leader>t :wq!
-vnoremap <Leader>t :wq!
+"nnoremap <Leader>t :wq!
+"vnoremap <Leader>t :wq!
 nnoremap <Leader>o :q!<CR>
 vnoremap <Leader>o :q!<CR>
 nnoremap <Leader>e :w!<CR>
@@ -140,8 +140,8 @@ vnoremap <Leader>h :vertical diffsplit
 nnoremap <Leader>h :vertical diffsplit
 
 " 置換
-nnoremap <Leader>s :%s#
-vnoremap <Leader>s :s#
+nnoremap <Leader>s :%s#\v
+vnoremap <Leader>s :s#\v
 
 " バッファ確認し、入力した数字のバッファに移動
 " (移動しない場合はそのままenter)
@@ -167,8 +167,8 @@ nnoremap <Leader>i :VimFilerBufferDir<CR>
 vnoremap <Leader>i :VimFilerBufferDir<CR>
 
 " クリップボードから貼り付け
-nnoremap <Leader>p "+p
-vnoremap <Leader>p "+p
+nnoremap <Leader>p "0p
+vnoremap <Leader>p "0p
 
 " バッファの場所に移動
 nnoremap <Leader>c :cd %:h\|pwd<CR>
@@ -177,6 +177,23 @@ vnoremap <Leader>c :cd %:h\|pwd<CR>
 " ハイライトを消す
 nnoremap <Leader>n :noh<CR>
 vnoremap <Leader>n :noh<CR>
+
+
+" vimgrep
+autocmd QuickFixCmdPost *grep* cwindow
+nnoremap <Leader>g :vim // **
+vnoremap <Leader>g :vim // **
+nnoremap 8 :cn<CR>
+vnoremap 8 :cn<CR>
+nnoremap 7 :cp<CR>
+vnoremap 7 :cp<CR>
+
+" 編集用一時領域作成
+nnoremap <Leader>t :split +enew<CR>
+vnoremap <Leader>t :split +enew<CR>
+
+
+
 
 
 
