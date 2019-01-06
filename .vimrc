@@ -157,10 +157,13 @@ nnoremap <Leader>a v$ho0
 vnoremap <Leader>a $ho0
 
 " 現在行に書いたコマンドの実行結果を持ってくる
-vnoremap <Leader><CR> :!sh<CR>    # 行選択中に実行
-nnoremap <Leader><CR> V:!sh<CR>   # 行選択していない状態から実行
-vnoremap <Leader>p<CR> :!pwsh -nol<CR>    # 行選択中に実行 Powershell
-nnoremap <Leader>p<CR> V:!pwsh -nol<CR>   # 行選択していない状態から実行 Powershell
+vnoremap <Leader><CR> :!sh<CR>
+nnoremap <Leader><CR> V:!sh<CR>
+vnoremap <Leader>p<CR> :!pwsh -nol<CR>
+nnoremap <Leader>p<CR> V:!pwsh -nol<CR>
+
+" date 出力
+noremap <Leader>@ :.!date<CR>:normal o<CR>
 
 " ファイルエクスプローラーを開く
 nnoremap <Leader>i :VimFilerBufferDir<CR>
