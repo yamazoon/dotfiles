@@ -97,7 +97,7 @@ set clipboard+=unnamed
 "set clipboard=unnamed,autoselect "autoselectを入れるとvisualモードで選択したテキストをクリップボードに入れるため削除
 "set clipboard=unnamed
 
-" mouse マウス禁止
+" mouse マウス禁止 -> 解除
 "set ttymouse=xterm2
 set mouse=a
 
