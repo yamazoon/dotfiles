@@ -89,6 +89,9 @@ nnoremap N Nzz
 " kensakukekka-highlight
 set hlsearch
 
+" ignorecase
+set ignorecase
+
 " describe number
 set number
 
