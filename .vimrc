@@ -16,9 +16,9 @@ let g:loaded_netrwSettings     = 1
 let g:loaded_netrwFileHandlers = 1
 
 " kunren
-nnoremap <Up> "
+nnoremap <Up> '
 nnoremap <Down> '
-vnoremap <Up> "
+vnoremap <Up> '
 vnoremap <Down> '
 nnoremap <left> ^
 nnoremap <right> $
@@ -124,6 +124,10 @@ colorscheme iceberg
 "	autocmd Colorscheme * highlight EndOfBuffer ctermbg=none 
 "augroup END
 
+" mark
+nnoremap _ '
+vnoremap _ '
+
 " Leaderキー
 let mapleader = "\<Space>"
 
@@ -195,7 +199,9 @@ vnoremap 7 :cp<CR>
 nnoremap <Leader>t :split +enew<CR>
 vnoremap <Leader>t :split +enew<CR>
 
-
+" 現在のバッファ内容をコピー
+nnoremap <Leader>y :%y<CR>
+vnoremap <Leader>y :%y<CR>
 
 
 
