@@ -137,10 +137,10 @@ let mapleader = "\<Space>"
 " ファイルを閉じる
 "nnoremap <Leader>t :wq!
 "vnoremap <Leader>t :wq!
-nnoremap <Leader>o :q!<CR>
-vnoremap <Leader>o :q!<CR>
-nnoremap <Leader>e :w!<CR>
-vnoremap <Leader>e :w!<CR>
+nnoremap <Leader>q :q!<CR>
+vnoremap <Leader>q :q!<CR>
+nnoremap <Leader>w :w!<CR>
+vnoremap <Leader>w :w!<CR>
 
 " ファイル比較
 vnoremap <Leader>h :vertical diffsplit
@@ -155,13 +155,19 @@ vnoremap <Leader>s :s#\v
 nnoremap <Leader>l :ls<CR>:b 
 vnoremap <Leader>l :ls<CR>:b 
 
+" バッファを切り替え
+nnoremap <Leader>[ :bnext<CR>
+vnoremap <Leader>[ :bnext<CR> 
+nnoremap <Leader>] :bprevious<CR>
+vnoremap <Leader>] :bprevious<CR> 
+
 " 今のバッファを保存しないで閉じる
 nnoremap <Leader>d :bd!<CR>
 vnoremap <Leader>d :bd!<CR>
 
-" 改行を含まない行選択
-nnoremap <Leader>a v$ho0
-vnoremap <Leader>a $ho0
+" 改行を含まない行コピー
+nnoremap <Leader>a v$ho0y
+vnoremap <Leader>a $ho0y
 
 " 現在行に書いたコマンドの実行結果を持ってくる
 vnoremap <Leader><CR> :!sh<CR>
@@ -207,6 +213,9 @@ nnoremap <Leader>y :%y<CR>
 vnoremap <Leader>y :%y<CR>
 
 
+" 現在のバッファ内容をコピー
+nnoremap <Leader>o o<ESC>
+vnoremap <Leader>o o<ESC>
 
 
 " プラグイン
