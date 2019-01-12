@@ -143,8 +143,8 @@ nnoremap <Leader>w :w!<CR>
 vnoremap <Leader>w :w!<CR>
 
 " ファイル比較
-vnoremap <Leader>h :vertical diffsplit
-nnoremap <Leader>h :vertical diffsplit
+vnoremap <Leader>h :vertical diffsplit 
+nnoremap <Leader>h :vertical diffsplit 
 
 " 置換
 nnoremap <Leader>s :%s#\v
@@ -178,13 +178,16 @@ nnoremap <Leader>p<CR> V:!pwsh -nol<CR>
 " date 出力
 noremap <Leader>@ :.!date<CR>:normal o<CR>
 
+" calender 出力
+noremap <Leader>\ :.!cal -h<CR>:normal O<CR>
+
 " ファイルエクスプローラーを開く
 nnoremap <Leader>i :VimFilerBufferDir<CR>
 vnoremap <Leader>i :VimFilerBufferDir<CR>
 
-" クリップボードから貼り付け
-nnoremap <Leader>p "+p
-vnoremap <Leader>p "+p
+" ヤンクレジスタから貼り付け
+nnoremap <Leader>p "0p
+vnoremap <Leader>p "0p
 
 " バッファの場所に移動
 nnoremap <Leader>c :cd %:h\|pwd<CR>
