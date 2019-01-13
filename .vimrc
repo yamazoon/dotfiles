@@ -66,21 +66,8 @@ set listchars=tab:>_,trail:_  " タブを >--- 半スペを . で表示する
 set noautoindent
 set nosmartindent
 
-"" kensaku kensuu count
-"nnoremap <expr> / _(":%s/<Cursor>/&/gn")
-"vnoremap <expr> / _(":%s/<Cursor>/&/gn")
-"set incsearch
-"
-"function! s:move_cursor_pos_mapping(str, ...)
-"    let left = get(a:, 1, "<Left>")
-"    let lefts = join(map(split(matchstr(a:str, '.*<Cursor>\zs.*\ze'), '.\zs'), 'left'), "")
-"    return substitute(a:str, '<Cursor>', '', '') . lefts
-"endfunction
-"
-"function! _(str)
-"    return s:move_cursor_pos_mapping(a:str, "\<Left>")
-"endfunction
-
+" increment search
+set incsearch
 
 " kensakukekka-mannnaka
 nnoremap n nzz
@@ -132,7 +119,7 @@ nnoremap _ '
 vnoremap _ '
 
 " Leaderキー
-let mapleader = "\<Space>"
+let g:mapleader = "\<Space>"
 
 " ファイルを閉じる
 "nnoremap <Leader>t :wq!
@@ -141,25 +128,29 @@ nnoremap <Leader>q :q!<CR>
 vnoremap <Leader>q :q!<CR>
 nnoremap <Leader>w :w!<CR>
 vnoremap <Leader>w :w!<CR>
+nnoremap <Leader>e :w 
+vnoremap <Leader>e :w 
+
+" 編集用一時領域作成
+nnoremap <Leader>t :split +enew<CR>
+vnoremap <Leader>t :split +enew<CR>
 
 " ファイル比較
 vnoremap <Leader>h :vertical diffsplit 
 nnoremap <Leader>h :vertical diffsplit 
 
 " 置換
-nnoremap <Leader>s :%s#\v
-vnoremap <Leader>s :s#\v
+nnoremap <Leader>s :%s#
+vnoremap <Leader>s :s#
+
+" ファイルエクスプローラーを開く
+nnoremap <Leader>i :VimFilerBufferDir<CR>
+vnoremap <Leader>i :VimFilerBufferDir<CR>
 
 " バッファ確認し、入力した数字のバッファに移動
 " (移動しない場合はそのままenter)
 nnoremap <Leader>l :ls<CR>:b 
 vnoremap <Leader>l :ls<CR>:b 
-
-" バッファを切り替え
-nnoremap <Leader>[ :bnext<CR>
-vnoremap <Leader>[ :bnext<CR> 
-nnoremap <Leader>] :bprevious<CR>
-vnoremap <Leader>] :bprevious<CR> 
 
 " 今のバッファを保存しないで閉じる
 nnoremap <Leader>d :bd!<CR>
@@ -168,22 +159,6 @@ vnoremap <Leader>d :bd!<CR>
 " 改行を含まない行コピー
 nnoremap <Leader>a v$ho0y
 vnoremap <Leader>a $ho0y
-
-" 現在行に書いたコマンドの実行結果を持ってくる
-vnoremap <Leader><CR> :!sh<CR>
-nnoremap <Leader><CR> V:!sh<CR>
-vnoremap <Leader>p<CR> :!pwsh -nol<CR>
-nnoremap <Leader>p<CR> V:!pwsh -nol<CR>
-
-" date 出力
-noremap <Leader>@ :.!date<CR>:normal o<CR>
-
-" calender 出力
-noremap <Leader>\ :.!cal -h<CR>:normal O<CR>
-
-" ファイルエクスプローラーを開く
-nnoremap <Leader>i :VimFilerBufferDir<CR>
-vnoremap <Leader>i :VimFilerBufferDir<CR>
 
 " ヤンクレジスタから貼り付け
 nnoremap <Leader>p "0p
@@ -197,6 +172,17 @@ vnoremap <Leader>c :cd %:h\|pwd<CR>
 nnoremap <Leader>n :noh<CR>
 vnoremap <Leader>n :noh<CR>
 
+" 現在行に書いたコマンドの実行結果を持ってくる
+vnoremap <Leader><CR> :!sh<CR>
+nnoremap <Leader><CR> V:!sh<CR>
+vnoremap <Leader>p<CR> :!pwsh -nol<CR>
+nnoremap <Leader>p<CR> V:!pwsh -nol<CR>
+
+" date 出力
+noremap <Leader>@ :.!date<CR>:normal o<CR>
+
+" calender 出力
+noremap <Leader>\ :.!cal -h<CR>:normal O<CR>
 
 " vimgrep
 autocmd QuickFixCmdPost *grep* cwindow
@@ -207,18 +193,28 @@ vnoremap 8 :cn<CR>
 nnoremap 7 :cp<CR>
 vnoremap 7 :cp<CR>
 
-" 編集用一時領域作成
-nnoremap <Leader>t :split +enew<CR>
-vnoremap <Leader>t :split +enew<CR>
-
 " 現在のバッファ内容をコピー
 nnoremap <Leader>y :%y<CR>
 vnoremap <Leader>y :%y<CR>
 
-
 " 現在のバッファ内容をコピー
 nnoremap <Leader>o o<ESC>
 vnoremap <Leader>o o<ESC>
+"
+" kensaku kensuu count
+nnoremap <expr> <Leader>/ _(":%s/<Cursor>/&/gn")
+vnoremap <expr> <Leader>/ _(":%s/<Cursor>/&/gn")
+
+function! s:move_cursor_pos_mapping(str, ...)
+    let left = get(a:, 1, "<Left>")
+    let lefts = join(map(split(matchstr(a:str, '.*<Cursor>\zs.*\ze'), '.\zs'), 'left'), "")
+    return substitute(a:str, '<Cursor>', '', '') . lefts
+endfunction
+
+function! _(str)
+    return s:move_cursor_pos_mapping(a:str, "\<Left>")
+endfunction
+
 
 
 " プラグイン
