@@ -1,4 +1,35 @@
-" fuyou-default-plugin
+" 端末セットアップ時にすること
+" 見た目と操作性は命
+"
+" capslock(cmd), 画面切替(C-j,k)のキーバインド変更
+"
+" iTerm2をicebergにする
+" https://github.com/Arc0re/Iceberg-iTerm2
+"
+" シェルをzshにする
+" chsh -s /bin/zsh
+" brew update
+" brew install zsh
+
+" Prezto入れる
+" https://github.com/sorin-ionescu/prezto
+" zstyle ':prezto:module:prompt' theme 'pure' # ここを変更
+
+" vimrcを入れる
+" https://github.com/yamazoon/dotfiles
+
+" dein入れる(vimfiler....etc)
+" https://github.com/Shougo/dein.vim
+
+" DASH(スニペット)
+" https://kapeli.com/dash
+"
+" clipy(クリップボード管理)
+" https://clipy-app.com/
+" 
+" Chrome(Vimnium),Typora,marp,showkeys,Licecap...etc
+
+" fuyou-default-plugin無効化
 let g:loaded_gzip              = 1
 let g:loaded_tar               = 1
 let g:loaded_tarPlugin         = 1
@@ -85,17 +116,15 @@ set number
 " clipboard
 set clipboard+=unnamed
 "set clipboard=unnamed,autoselect "autoselectを入れるとvisualモードで選択したテキストをクリップボードに入れるため削除
-"set clipboard=unnamed
 
-" mouse マウス禁止 -> 解除
+" mouse
 "set ttymouse=xterm2
 set mouse=a
 
 " color
-"syntax enable
+syntax enable
 colorscheme iceberg
 
-"syntax enable
 "set background=dark
 "set background=light
 "colorscheme solarized
@@ -217,8 +246,12 @@ endfunction
 
 
 
-" プラグイン
 
+" プラグインは個別インストールする
+
+
+
+" Neobundle (下でdeinに乗り換えています)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" NeoBundle
 "" Note: Skip initialization for vim-tiny or vim-small.
@@ -282,29 +315,79 @@ endfunction
 "NeoBundleCheck
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
 " NERDTree
 " map <C-n> :NERDTreeToggle<CR>
 
 
 
 
+" use dein
+" https://github.com/Shougo/dein.vim
+" 端末によって変わる
+""dein Scripts-----------------------------
+"if &compatible
+"  set nocompatible               " Be iMproved
+"endif
+"
+"" Required:
+"set runtimepath+=/Users/tetsuya/dotfiles/.vim/dein/repos/github.com/Shougo/dein.vim
+"
+"" Required:
+"if dein#load_state('/Users/tetsuya/dotfiles/.vim/dein')
+"  call dein#begin('/Users/tetsuya/dotfiles/.vim/dein')
+"
+"  " Let dein manage dein
+"  " Required:
+"  call dein#add('/Users/tetsuya/dotfiles/.vim/dein/repos/github.com/Shougo/dein.vim')
+"
+"  " Add or remove your plugins here like this:
+"  "call dein#add('Shougo/neosnippet.vim')
+"  "call dein#add('Shougo/neosnippet-snippets')
+"   call dein#add('Shougo/unite.vim')
+"   call dein#add('Shougo/vimfiler')
+"   "call dein#add('Yggdroot/indentLine')
+"   "call dein#add('cocopon/iceberg.vim')
+"   "call dein#add('kannokanno/previm')
+"   call dein#add('terryma/vim-expand-region')
+"   call dein#add('tpope/vim-surround')
+"  " Required:
+"  call dein#end()
+"  call dein#save_state()
+"endif
+"
+"" Required:
+"filetype plugin indent on
+"syntax enable
+"
+"" If you want to install not installed plugins on startup.
+"if dein#check_install()
+"  call dein#install()
+"endif
+"
+""End dein Scripts-------------------------
+
+
+
+
+
+
+
+" my mac 11
 "dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
 endif
 
 " Required:
-set runtimepath+=/Users/tetsuya/dotfiles/.vim/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=/Users/t-yamamoto/dotfiles/.vim/bundle/repos/github.com/Shougo/dein.vim
 
 " Required:
-if dein#load_state('/Users/tetsuya/dotfiles/.vim/dein')
-  call dein#begin('/Users/tetsuya/dotfiles/.vim/dein')
+if dein#load_state('/Users/t-yamamoto/dotfiles/.vim/bundle')
+  call dein#begin('/Users/t-yamamoto/dotfiles/.vim/bundle')
 
   " Let dein manage dein
   " Required:
-  call dein#add('/Users/tetsuya/dotfiles/.vim/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add('/Users/t-yamamoto/dotfiles/.vim/bundle/repos/github.com/Shougo/dein.vim')
 
   " Add or remove your plugins here like this:
   "call dein#add('Shougo/neosnippet.vim')
@@ -316,6 +399,7 @@ if dein#load_state('/Users/tetsuya/dotfiles/.vim/dein')
    "call dein#add('kannokanno/previm')
    call dein#add('terryma/vim-expand-region')
    call dein#add('tpope/vim-surround')
+
   " Required:
   call dein#end()
   call dein#save_state()
@@ -326,11 +410,33 @@ filetype plugin indent on
 syntax enable
 
 " If you want to install not installed plugins on startup.
-if dein#check_install()
-  call dein#install()
-endif
+"if dein#check_install()
+"  call dein#install()
+"endif
 
 "End dein Scripts-------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 " プラグイン関連設定
