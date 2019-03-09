@@ -1,3 +1,4 @@
+
 " 端末セットアップ時にすること
 " 見た目と操作性は命
 "
@@ -29,7 +30,7 @@
 " 
 " Chrome(Vimnium),Typora,marp,showkeys,Licecap...etc
 
-" fuyou-default-plugin無効化
+" fuyou-default-plugin無効化" fuyou-default-plugin
 let g:loaded_gzip              = 1
 let g:loaded_tar               = 1
 let g:loaded_tarPlugin         = 1
@@ -116,36 +117,49 @@ set number
 " clipboard
 set clipboard+=unnamed
 "set clipboard=unnamed,autoselect "autoselectを入れるとvisualモードで選択したテキストをクリップボードに入れるため削除
+"set clipboard=unnamed
 
-" mouse
+" mouse マウス禁止
 "set ttymouse=xterm2
 set mouse=a
 
+"背景透過
+highlight Normal ctermbg=none
+highlight NonText ctermbg=none
+highlight LineNr ctermbg=none
+highlight Folded ctermbg=none
+highlight EndOfBuffer ctermbg=none
+
+"カラースキームをコマンドラインから変更しても、背景透過を維持
+augroup TransparentBG
+        autocmd!
+        autocmd Colorscheme * highlight Normal ctermbg=none
+        autocmd Colorscheme * highlight NonText ctermbg=none
+        autocmd Colorscheme * highlight LineNr ctermbg=none
+        autocmd Colorscheme * highlight Folded ctermbg=none
+        autocmd Colorscheme * highlight EndOfBuffer ctermbg=none 
+augroup END
+
 " color
-syntax enable
 colorscheme iceberg
+syntax on
 
 "set background=dark
 "set background=light
 "colorscheme solarized
 "let g:solarized_termcolors=256
-"highlight Normal ctermbg=none
-"highlight NonText ctermbg=none
-"highlight LineNr ctermbg=none
-"highlight Folded ctermbg=none
-"highlight EndOfBuffer ctermbg=none
-"augroup TransparentBG
-"	autocmd!
-"	autocmd Colorscheme * highlight Normal ctermbg=none
-"	autocmd Colorscheme * highlight NonText ctermbg=none
-"	autocmd Colorscheme * highlight LineNr ctermbg=none
-"	autocmd Colorscheme * highlight Folded ctermbg=none
-"	autocmd Colorscheme * highlight EndOfBuffer ctermbg=none 
-"augroup END
 
 " mark
 nnoremap _ '
 vnoremap _ '
+
+" & map &&
+nnoremap & :&&<CR>
+vnoremap & :&&<CR>
+
+" Statuslineの設定
+set laststatus=2
+set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ \[ENC=%{&fileencoding}]%P
 
 " Leaderキー
 let g:mapleader = "\<Space>"
@@ -153,10 +167,12 @@ let g:mapleader = "\<Space>"
 " ファイルを閉じる
 "nnoremap <Leader>t :wq!
 "vnoremap <Leader>t :wq!
-nnoremap <Leader>q :q!<CR>
-vnoremap <Leader>q :q!<CR>
+nnoremap <Leader>[ :q!<CR>
+vnoremap <Leader>[ :q!<CR>
 nnoremap <Leader>w :w!<CR>
 vnoremap <Leader>w :w!<CR>
+nnoremap <Leader>] :wq!<CR>
+vnoremap <Leader>] :wq!<CR>
 nnoremap <Leader>e :w 
 vnoremap <Leader>e :w 
 
@@ -184,6 +200,14 @@ vnoremap <Leader>l :ls<CR>:b
 " 今のバッファを保存しないで閉じる
 nnoremap <Leader>d :bd!<CR>
 vnoremap <Leader>d :bd!<CR>
+
+" 今のバッファを保存しないで閉じる
+nnoremap <Leader>b :%d<CR>
+vnoremap <Leader>b :%d<CR>
+
+" バッファの内容を削除
+nnoremap <Leader>f :%d<CR>
+vnoremap <Leader>f :%d<CR>
 
 " 改行を含まない行コピー
 nnoremap <Leader>a v$ho0y
@@ -226,9 +250,9 @@ vnoremap 7 :cp<CR>
 nnoremap <Leader>y :%y<CR>
 vnoremap <Leader>y :%y<CR>
 
-" 現在のバッファ内容をコピー
-nnoremap <Leader>o o<ESC>
-vnoremap <Leader>o o<ESC>
+" 上に一行空ける
+nnoremap <Leader>o O<ESC>
+vnoremap <Leader>o O<ESC>
 "
 " kensaku kensuu count
 nnoremap <expr> <Leader>/ _(":%s/<Cursor>/&/gn")
@@ -243,6 +267,61 @@ endfunction
 function! _(str)
     return s:move_cursor_pos_mapping(a:str, "\<Left>")
 endfunction
+
+
+
+
+" Qargs
+" https://github.com/nelstrom/vim-qargs/blob/master/plugin/qargs.vim
+command! -nargs=0 -bar Qargs execute 'args' QuickfixFilenames()
+function! QuickfixFilenames()
+  " Building a hash ensures we get each buffer only once
+  let buffer_numbers = {}
+  for quickfix_item in getqflist()
+    let bufnr = quickfix_item['bufnr']
+    " Lines without files will appear as bufnr=0
+    if bufnr > 0
+      let buffer_numbers[bufnr] = bufname(bufnr)
+    endif
+  endfor
+  return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
+endfunction
+
+
+
+
+" bronson/vim-visual-star-search
+" From http://got-ravings.blogspot.com/2008/07/vim-pr0n-visual-search-mappings.html
+
+" makes * and # work on visual mode too.  global function so user mappings can call it.
+" specifying 'raw' for the second argument prevents escaping the result for vimgrep
+" TODO: there's a bug with raw mode.  since we're using @/ to return an unescaped
+" search string, vim's search highlight will be wrong.  Refactor plz.
+ function! VisualStarSearchSet(cmdtype,...)
+   let temp = @"
+   normal! gvy
+   if !a:0 || a:1 != 'raw'
+     let @" = escape(@", a:cmdtype.'\*')
+   endif
+   let @/ = substitute(@", '\n', '\\n', 'g')
+   let @/ = substitute(@/, '\[', '\\[', 'g')
+   let @/ = substitute(@/, '\~', '\\~', 'g')
+   let @" = temp
+ endfunction
+ 
+ " replace vim's built-in visual * and # behavior
+ xnoremap * :<C-u>call VisualStarSearchSet('/')<CR>/<C-R>=@/<CR><CR>
+ xnoremap # :<C-u>call VisualStarSearchSet('?')<CR>?<C-R>=@/<CR><CR>
+ 
+ " recursively vimgrep for word under cursor or selection
+ if maparg('<leader>*', 'n') == ''
+   nnoremap <leader>* :execute 'noautocmd vimgrep /\V' . substitute(escape(expand("<cword>"), '\'), '\n', '\\n', 'g') . '/ **'<CR>
+ endif
+ if maparg('<leader>*', 'v') == ''
+   vnoremap <leader>* :<C-u>call VisualStarSearchSet('/')<CR>:execute 'noautocmd vimgrep /' . @/ . '/ **'<CR>
+ endif
+
+
 
 
 
