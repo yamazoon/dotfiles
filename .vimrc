@@ -1,4 +1,3 @@
-
 " 端末セットアップ時にすること
 " 見た目と操作性は命
 "
@@ -95,8 +94,8 @@ set listchars=tab:>_,trail:_  " タブを >--- 半スペを . で表示する
 "set listchars+=space:\|
 
 " no indent
-set noautoindent
-set nosmartindent
+" set noautoindent
+" set nosmartindent
 
 " increment search
 set incsearch
@@ -117,7 +116,7 @@ set number
 " clipboard
 set clipboard+=unnamed
 "set clipboard=unnamed,autoselect "autoselectを入れるとvisualモードで選択したテキストをクリップボードに入れるため削除
-"set clipboard=unnamed
+set clipboard=unnamed
 
 " mouse マウス禁止
 "set ttymouse=xterm2
@@ -141,7 +140,8 @@ augroup TransparentBG
 augroup END
 
 " color
-colorscheme iceberg
+" colorscheme iceberg
+colorscheme hybrid
 syntax on
 
 "set background=dark
@@ -158,8 +158,8 @@ nnoremap & :&&<CR>
 vnoremap & :&&<CR>
 
 " Statuslineの設定
-set laststatus=2
-set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ \[ENC=%{&fileencoding}]%P
+" set laststatus=2
+" set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ \[ENC=%{&fileencoding}]%P
 
 " Leaderキー
 let g:mapleader = "\<Space>"
@@ -452,21 +452,22 @@ endfunction
 
 
 " my mac 11
-"dein Scripts-----------------------------
+
+
 if &compatible
   set nocompatible               " Be iMproved
 endif
 
 " Required:
-set runtimepath+=/Users/t-yamamoto/dotfiles/.vim/bundle/repos/github.com/Shougo/dein.vim
+set runtimepath+=/Users/yamamoto/.vim/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-if dein#load_state('/Users/t-yamamoto/dotfiles/.vim/bundle')
-  call dein#begin('/Users/t-yamamoto/dotfiles/.vim/bundle')
+if dein#load_state('/Users/yamamoto/.vim/dein')
+  call dein#begin('/Users/yamamoto/.vim/dein')
 
   " Let dein manage dein
   " Required:
-  call dein#add('/Users/t-yamamoto/dotfiles/.vim/bundle/repos/github.com/Shougo/dein.vim')
+  call dein#add('/Users/yamamoto/.vim/dein/repos/github.com/Shougo/dein.vim')
 
   " Add or remove your plugins here like this:
   "call dein#add('Shougo/neosnippet.vim')
@@ -489,13 +490,9 @@ filetype plugin indent on
 syntax enable
 
 " If you want to install not installed plugins on startup.
-"if dein#check_install()
-"  call dein#install()
-"endif
-
-"End dein Scripts-------------------------
-
-
+if dein#check_install()
+  call dein#install()
+endif
 
 
 
@@ -534,5 +531,4 @@ let g:vimfiler_safe_mode_by_default = 0
 "let g:previm_custom_css_path = '~/dotfiles/.vim/previm/markdown.css'
 "nnoremap <Leader>m :PrevimOpen<CR>
 "vnoremap <Leader>m :PrevimOpen<CR>
-
 
